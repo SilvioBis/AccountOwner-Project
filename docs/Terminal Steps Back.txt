@@ -1,0 +1,13 @@
+/*Acessar a pasta do backend*/
+cd backend
+
+/*Criar uma solução dentro da pasta do beckend*/
+dotnet new sln --name AccountOwnerServer
+
+/* Criar o projeto API dentro da pasta do beckendd*/
+dotnet new webapi --name AccountOwnerServer -f net6.0 -lang "C#"
+
+/*Adicionar o projeto na solução na pasta do beckend*/
+dotnet sln add AccountOwnerServer\AccountOwnerServer.csproj
+
+
