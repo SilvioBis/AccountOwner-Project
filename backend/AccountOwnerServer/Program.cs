@@ -29,10 +29,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 //Para permitir funcionar no linux
-app.UseForwardedHeaders(new ForwardedHeadersOptions)
+app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
-    ForwardedHeaders = ForwardedHeaders.All;
-}
+    ForwardedHeaders = ForwardedHeaders.All
+});
 
 app.UseCors("CorsPolicy");
 
