@@ -1,13 +1,46 @@
-/*Acessar a pasta do backend*/
-cd backend
+/* Adicionar o projeto do Serviço de Log */
+dotnet new classlib --name LoggerService -f net6.0
 
-/*Criar uma solução dentro da pasta do beckend*/
-dotnet new sln --name AccountOwnerServer
+/* Adicionar o projeto na solução */
+dotnet sln add LoggerService\LoggerService.csproj
 
-/* Criar o projeto API dentro da pasta do beckendd*/
-dotnet new webapi --name AccountOwnerServer -f net6.0 -lang "C#"
+/* Adicionar referência do Contracts no LoggerService */
+dotnet add LoggerService\LoggerService.csproj reference Contracts\Contracts.csproj
 
-/*Adicionar o projeto na solução na pasta do beckend*/
-dotnet sln add AccountOwnerServer\AccountOwnerServer.csproj
+/* Adicionar referência do LoggerService na API*/
+dotnet add AccountOwnerServer\AccountOwnerServer.csproj reference LoggerService\LoggerService.csproj
+
+/* Entrar na pasta do projeto LoggerService */
+cd LoggerService
+
+/* Instalar o pacote NLog - Nuget */
+dotnet add package NLog.Extensions.Logging --version 5.2.1
 
 
+
+/* Adicionar o projeto da Entidades - Models na pasta do BackEnd*/
+dotnet new classlib --name Entities -f net6.0
+
+/* Adicionar o projeto na solução */
+dotnet sln add Entities\Entities.csproj
+
+
+/* Instalar o pacote do Pomelo na pasta do Entities */
+dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0.2
+
+
+/* Referencia o projeto Entities no AccountOwnerServer*/
+dotnet add AccountOwnerServer\AccountOwnerServer.csproj reference Entities\Entities.csproj
+
+
+/* Adicionar o projeto de Repositório - na pasta do BackEnd*/
+dotnet new classlib --name Repository -f net6.0
+
+/* Adicionar o projeto na solução */
+dotnet sln add Repository\Repository.csproj
+
+
+dotnet add Repository\Repository.csproj reference Entities\Entities.csproj
+dotnet add Repository\Repository.csproj reference Contracts\Contracts.csproj
+
+dotnet add AccountOwnerServer\AccountOwnerServer.csproj reference Repository\Repository.csproj
